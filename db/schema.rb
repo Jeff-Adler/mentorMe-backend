@@ -24,8 +24,8 @@ ActiveRecord::Schema.define(version: 2020_09_17_005127) do
   end
 
   create_table "connections", force: :cascade do |t|
-    t.bigint "mentee_id", null: false
-    t.bigint "mentor_id", null: false
+    t.bigint "mentee_id"
+    t.bigint "mentor_id"
     t.boolean "accepted", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
