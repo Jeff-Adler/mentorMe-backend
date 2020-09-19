@@ -1,6 +1,6 @@
 class Api::V1::UsersController < ApplicationController
   skip_before_action :authorized, only: [:create]
-  before_action :find_user, only: [:update]
+  before_action :find_user, only: [:update, :retrieve_eligible_mentors]
  
   def profile
     render json: { user: UserSerializer.new(current_user) }, status: :accepted
@@ -17,8 +17,17 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def update
-    @user.update(user_edit_params)
+    @user.assign_attributes(user_edit_params)
+    @user.save(validate: false) #Overrides minimum password character count validation, which wrongly applies otherwise
     render json: {user: UserSerializer.new(@user)}
+  end
+
+  def retrieve_eligible_mentors
+    if @user.birthdate
+      render json: @user.eligible_mentors
+    else
+      render json: { error: 'Need to set your birthdate!' }, status: :not_acceptable
+    end
   end
  
   private
@@ -28,7 +37,7 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def user_edit_params
-    params.require(:user).permit(:username,:birthdate,:gender,:avatar,:karma).select { |k, v| !v.nil? }
+    params.require(:user).permit(:username, :password, :birthdate,:gender,:avatar,:karma).select { |k, v| !v.nil? }
   end
 
   def user_params

@@ -10,16 +10,13 @@ class User < ApplicationRecord
     has_many :mentees, through: :mentee_connections, foreign_key: :mentee_id
 
 
-    def get_eligible_mentors
-        #for every user, 
-            #if user != current_user
-                #if get_older == true
-                    #add to array of eligible mentors
+    def eligible_mentors
+        eligible_mentors = User.all.select do |user|
+            self.is_younger?(user) unless user.id == self.id
+        end
     end
 
-    #returns T if user's bday was before current_user's
-    #may require 'date'
-    def get_older(user)
-        #Date.parse(user.birthdate) < Date.parse(current_user.birthdate)
+    def is_younger?(user)
+        Date.parse(user.birthdate) > Date.parse(self.birthdate)
     end
 end
