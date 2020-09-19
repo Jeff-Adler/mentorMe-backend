@@ -17,7 +17,7 @@ for i in 0..20 do
     gender = (i % 2 == 0) ? "male" : "female"
 
     user = User.create!(
-        username: Faker::Name.unique.name,
+        username: Faker::Alphanumeric.alpha(number: 10),
         password: Faker::Alphanumeric.alpha(number: 10),
         birthdate: Faker::Date.birthday(min_age: 18, max_age: 65),
         gender: gender,
