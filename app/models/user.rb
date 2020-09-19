@@ -9,7 +9,6 @@ class User < ApplicationRecord
     has_many :mentee_connections, class_name: :Connection, foreign_key: :mentor_id
     has_many :mentees, through: :mentee_connections, foreign_key: :mentee_id
 
-
     def eligible_mentors
         eligible_mentors = User.all.select do |user|
             self.is_younger?(user) unless user.id == self.id
