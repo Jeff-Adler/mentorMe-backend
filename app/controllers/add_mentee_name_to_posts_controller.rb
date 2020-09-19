@@ -1,2 +1,0 @@
-class AddMenteeNameToPostsController < ApplicationController
-end

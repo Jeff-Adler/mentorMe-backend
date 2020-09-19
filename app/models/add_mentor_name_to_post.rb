@@ -1,2 +1,0 @@
-class AddMentorNameToPost < ApplicationRecord
-end

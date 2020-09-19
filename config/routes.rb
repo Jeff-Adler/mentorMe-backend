@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
-  resources :add_mentee_name_to_posts
-  resources :add_mentor_name_to_posts
+  
+  patch 'api/v1/users/:id', to: 'api/v1/users#update'
+
   resources :answers
   resources :questions
   resources :posts
