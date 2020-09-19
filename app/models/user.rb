@@ -11,7 +11,7 @@ class User < ApplicationRecord
 
     def eligible_mentors
         eligible_mentors = User.all.select do |user|
-            self.is_younger?(user) unless user.id == self.id
+            self.is_younger?(user) unless user.id == self.id || user.birthdate == nil
         end
     end
 
