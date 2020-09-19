@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :add_mentee_name_to_posts
+  resources :add_mentor_name_to_posts
   resources :answers
   resources :questions
   resources :posts

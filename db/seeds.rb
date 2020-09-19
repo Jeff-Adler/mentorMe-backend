@@ -38,7 +38,7 @@ for i in 0..40 do
     )
 
     post = Post.create!(
-        connection: connection,
+        connection: connection, mentee_name:connection.mentee.username, mentor_name:connection.mentor.username
     )
 
     question = Question.create!(

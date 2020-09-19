@@ -1,0 +1,2 @@
+class AddMenteeNameToPost < ApplicationRecord
+end

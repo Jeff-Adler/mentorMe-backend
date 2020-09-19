@@ -1,0 +1,2 @@
+class AddMentorNameToPostsController < ApplicationController
+end
