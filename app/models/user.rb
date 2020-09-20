@@ -25,7 +25,7 @@ class User < ApplicationRecord
         end
 
         if connections != []
-            pendings = connections.all.map do |connection|
+            pendings = connections.map do |connection|
                 connection.mentee
             end
         else

@@ -33,7 +33,7 @@ class Api::V1::UsersController < ApplicationController
   #Retrieves all the users for whom they are the mentor_id in connections
   def retrieve_pendings
     if @user.pendings != nil
-      return json: @user.pendings
+      render json: @user.pendings
     else
       render json: { error: 'No pending requests!' }, status: :not_acceptable
     end
