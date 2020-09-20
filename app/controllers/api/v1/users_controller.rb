@@ -1,6 +1,6 @@
 class Api::V1::UsersController < ApplicationController
   skip_before_action :authorized, only: [:create]
-  before_action :find_user, only: [:update, :retrieve_eligible_mentors]
+  before_action :find_user, only: [:update, :retrieve_eligible_mentors, :retrieve_pendings]
  
   def profile
     render json: { user: UserSerializer.new(current_user) }, status: :accepted
@@ -27,6 +27,15 @@ class Api::V1::UsersController < ApplicationController
       render json: @user.eligible_mentors
     else
       render json: { error: 'Need to set your birthdate!' }, status: :not_acceptable
+    end
+  end
+
+  #Retrieves all the users for whom they are the mentor_id in connections
+  def retrieve_pendings
+    if @user.pendings != nil
+      return json: @user.pendings
+    else
+      render json: { error: 'No pending requests!' }, status: :not_acceptable
     end
   end
  

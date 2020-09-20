@@ -18,4 +18,18 @@ class User < ApplicationRecord
     def is_younger?(user)
         Date.parse(user.birthdate) > Date.parse(self.birthdate)
     end
+
+    def pendings
+        connections = Connection.all.select do |connection| 
+            connection.mentor_id == self.id
+        end
+
+        if connections != []
+            pendings = connections.all.map do |connection|
+                connection.mentee
+            end
+        else
+            nil
+        end
+    end
 end
