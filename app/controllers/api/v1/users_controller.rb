@@ -1,6 +1,6 @@
 class Api::V1::UsersController < ApplicationController
   skip_before_action :authorized, only: [:create]
-  before_action :find_user, only: [:update, :retrieve_eligible_mentors, :retrieve_pendings]
+  before_action :find_user, only: [:show, :update, :retrieve_eligible_mentors, :retrieve_pendings]
  
   def profile
     render json: { user: UserSerializer.new(current_user) }, status: :accepted
@@ -19,6 +19,10 @@ class Api::V1::UsersController < ApplicationController
   def update
     @user.assign_attributes(user_edit_params)
     @user.save(validate: false) #Overrides minimum password character count validation, which wrongly applies otherwise
+    render json: {user: UserSerializer.new(@user)}
+  end
+
+  def show
     render json: {user: UserSerializer.new(@user)}
   end
 
