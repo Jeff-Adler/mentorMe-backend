@@ -18,6 +18,8 @@ for i in 0..20 do
 
     user = User.create!(
         username: Faker::Alphanumeric.alpha(number: 10),
+        first_name: Faker::Name.first_name,
+        last_name: Faker::Name.last_name,
         password: Faker::Alphanumeric.alpha(number: 10),
         birthdate: Faker::Date.birthday(min_age: 18, max_age: 65),
         gender: gender,
