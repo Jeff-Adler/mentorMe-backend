@@ -27,11 +27,11 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def retrieve_mentor_posts
-    render json: @user.mentor_posts
+    render json: @user.posts("mentor")
   end
 
   def retrieve_mentee_posts
-    render json: @user.mentee_posts
+    render json: @user.posts("mentee")
   end
 
   def retrieve_eligible_mentors
@@ -42,12 +42,23 @@ class Api::V1::UsersController < ApplicationController
     end
   end
 
-  #Retrieves all the users for whom they are the mentor_id in connections
+  #Retrieves all the users for whom they are the mentor_id in connections and the associated connections
   def retrieve_pendings
-    if @user.pendings != nil
-      render json: @user.pendings
+    if @user.pending_connections != nil && @user.pending_users != nil
+      render json: {pending_users: @user.pending_users} 
     else
       render json: { error: 'No pending requests!' }, status: :not_acceptable
+    end
+  end
+
+  def accept_pending
+    connection = Connection.find_by(mentee_id: user_accept_params[:user_id], mentor_id: params[:id])
+    connection.accepted = true
+    connection.save
+    if connection.valid?
+      render json: connection
+    else
+        render json: {error: "Could not update connection"}
     end
   end
  
@@ -63,5 +74,9 @@ class Api::V1::UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:username, :password)
+  end
+
+  def user_accept_params
+    params.require(:user).permit(:user_id)
   end
 end

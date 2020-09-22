@@ -19,10 +19,14 @@ class User < ApplicationRecord
         Date.parse(user.birthdate) > Date.parse(self.birthdate)
     end
 
-    def pendings
-        connections = Connection.all.select do |connection| 
-            connection.mentor_id == self.id
+    def pending_connections 
+        Connection.all.select do |connection| 
+            connection.mentor_id == self.id && connection.accepted == false
         end
+    end
+
+    def pending_users
+        connections = self.pending_connections
 
         if connections != []
             pendings = connections.map do |connection|
