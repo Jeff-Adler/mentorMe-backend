@@ -1,6 +1,6 @@
 class Api::V1::UsersController < ApplicationController
   skip_before_action :authorized, only: [:create]
-  before_action :find_user, only: [:show, :update, :retrieve_eligible_mentors, :retrieve_pendings]
+  before_action :find_user, only: [:show, :update, :retrieve_eligible_mentors, :retrieve_pendings,:retrieve_mentor_posts,:retrieve_mentee_posts]
  
   def profile
     render json: { user: UserSerializer.new(current_user) }, status: :accepted
@@ -26,7 +26,12 @@ class Api::V1::UsersController < ApplicationController
     render json: {user: UserSerializer.new(@user)}
   end
 
-  def retrieve_posts
+  def retrieve_mentor_posts
+    render json: @user.mentor_posts
+  end
+
+  def retrieve_mentee_posts
+    render json: @user.mentee_posts
   end
 
   def retrieve_eligible_mentors

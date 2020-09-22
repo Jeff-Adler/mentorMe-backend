@@ -33,17 +33,27 @@ class User < ApplicationRecord
         end
     end
 
-    def posts 
-        #get every connection for which user user is the (mentor or mentee)
-            #get every post that has any of those connection
+    def mentor_posts 
         connections = Connection.all.select do |connection|
-            connection.mentor_id == self.id
+            connection.mentor_id == self.id && connection.accepted == true 
         end
 
-        # if connections != nil
-        #     posts = Posts.select do |post|
-        #         post.connection 
-        #     end
-        # end
+        if connections != nil
+            posts = connections.map do |connection|
+                connection.post
+            end
+        end
+    end
+
+    def mentee_posts 
+        connections = Connection.all.select do |connection|
+            connection.mentee_id == self.id && connection.accepted == true
+        end
+
+        if connections != nil
+            posts = connections.map do |connection|
+                connection.post
+            end
+        end
     end
 end
