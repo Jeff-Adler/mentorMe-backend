@@ -26,6 +26,9 @@ class Api::V1::UsersController < ApplicationController
     render json: {user: UserSerializer.new(@user)}
   end
 
+  def retrieve_posts
+  end
+
   def retrieve_eligible_mentors
     if @user.birthdate
       render json: @user.eligible_mentors
