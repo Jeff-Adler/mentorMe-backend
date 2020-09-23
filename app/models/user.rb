@@ -16,7 +16,7 @@ class User < ApplicationRecord
     end
 
     def is_younger?(user)
-        Date.parse(user.birthdate) > Date.parse(self.birthdate)
+        Date.parse(user.birthdate) < Date.parse(self.birthdate)
     end
 
     def pending_connections 
