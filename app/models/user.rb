@@ -19,6 +19,9 @@ class User < ApplicationRecord
         Date.parse(user.birthdate) < Date.parse(self.birthdate)
     end
 
+    def connection_exists?
+    end
+
     def pending_connections 
         Connection.all.select do |connection| 
             connection.mentor_id == self.id && connection.accepted == false
