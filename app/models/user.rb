@@ -9,6 +9,14 @@ class User < ApplicationRecord
     has_many :mentee_connections, class_name: :Connection, foreign_key: :mentor_id
     has_many :mentees, through: :mentee_connections, foreign_key: :mentee_id
 
+    def calculate_karma
+        if self.mentee_connections.length != 0
+            self.mentor_connections.length / self.mentee_connections.length
+        else
+            0
+        end
+    end
+    
     def eligible_mentors
         eligible_mentors = User.all.select do |user|
             self.is_younger?(user) unless user.id == self.id || user.birthdate == nil
@@ -21,9 +29,6 @@ class User < ApplicationRecord
 
     def is_younger?(user)
         Date.parse(user.birthdate) < Date.parse(self.birthdate)
-    end
-
-    def connection_exists?
     end
 
     def pending_connections 
