@@ -13,6 +13,10 @@ class User < ApplicationRecord
         eligible_mentors = User.all.select do |user|
             self.is_younger?(user) unless user.id == self.id || user.birthdate == nil
         end
+
+        filtered_eligible_mentors = eligible_mentors.select do |user|
+            Connection.find_by(mentee: self, mentor: user) == nil
+        end
     end
 
     def is_younger?(user)
