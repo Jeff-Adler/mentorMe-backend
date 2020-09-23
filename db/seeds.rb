@@ -17,7 +17,7 @@ for i in 0..20 do
     gender = (i % 2 == 0) ? "male" : "female"
 
     user = User.create!(
-        username: Faker::Alphanumeric.alpha(number: 10),
+        username: Faker::Internet.username(specifier: 7..12),
         first_name: Faker::Name.first_name,
         last_name: Faker::Name.last_name,
         password: Faker::Alphanumeric.alpha(number: 10),
