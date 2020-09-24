@@ -5,10 +5,7 @@ Rails.application.routes.draw do
   patch 'api/v1/users/:id', to: 'api/v1/users#update'
   get 'api/v1/users/:id/posts/mentor', to: 'api/v1/users#retrieve_mentor_posts'
   get 'api/v1/users/:id/posts/mentee', to: 'api/v1/users#retrieve_mentee_posts'
-  get 'api/v1/users/:id/retrieve_eligibles', to: 'api/v1/users#retrieve_eligible_mentors'
-  get 'api/v1/users/:id/retrieve_eligibles/professional', to: 'api/v1/users#retrieve_eligible_mentors'
-  get 'api/v1/users/:id/retrieve_eligibles/interpersonal', to: 'api/v1/users#retrieve_eligible_mentors'
-  get 'api/v1/users/:id/retrieve_eligibles/self-improvement', to: 'api/v1/users#retrieve_eligible_mentors'
+  get 'api/v1/users/:id/retrieve_eligibles/:mentor_type', to: 'api/v1/users#retrieve_eligible_mentors'
   get 'api/v1/users/:id/retrieve_pendings', to: 'api/v1/users#retrieve_pendings'
   patch 'api/v1/users/:id/accept_pending', to: 'api/v1/users#accept_pending'
   

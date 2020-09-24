@@ -35,7 +35,7 @@ class User < ApplicationRecord
         #filters out users who are younger than self
         older_users = self.compare_ages(non_connected_users)
         #finds all users whose experiences matches mentor_type
-        eligible_mentors = self.match_experiences(older_users)
+        eligible_mentors = self.match_experiences(older_users,mentor_type)
     end
 
     def filter_self(users)
