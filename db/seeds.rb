@@ -5,8 +5,6 @@ Answer.destroy_all
 Post.destroy_all
 Connection.destroy_all
 User.destroy_all
-MenteeExperience.destroy_all
-MentorExperience.destroy_all
 
 for i in 0..20 do
     gender = (i % 2 == 0) ? "male" : "female"
@@ -46,29 +44,5 @@ for i in 0..40 do
     answer = Answer.create!(
         answer: Faker::Lorem.paragraph(sentence_count: 2, supplemental: false, random_sentences_to_add: 4),
         post: post
-    )
-end
-
-User.all.each do |user|
-    MenteeExperience.create!(
-        high_school: (rand(0..1) == 0) ? true : false,
-        college: (rand(0..1) == 0) ? true : false,
-        early_career: (rand(0..1) == 0) ? true : false,
-        personal_relationships: (rand(0..1) == 0) ? true : false,
-        romantic_relationships: (rand(0..1) == 0) ? true : false,
-        passions: (rand(0..1) == 0) ? true : false,
-        self_confidence: (rand(0..1) == 0) ? true : false,
-        user:user
-    )
-
-    MentorExperience.create!(
-        high_school: (rand(0..1) == 0) ? true : false,
-        college: (rand(0..1) == 0) ? true : false,
-        early_career: (rand(0..1) == 0) ? true : false,
-        personal_relationships: (rand(0..1) == 0) ? true : false,
-        romantic_relationships: (rand(0..1) == 0) ? true : false,
-        passions: (rand(0..1) == 0) ? true : false,
-        self_confidence: (rand(0..1) == 0) ? true : false,
-        user:user
     )
 end

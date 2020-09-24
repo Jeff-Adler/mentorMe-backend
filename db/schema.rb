@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_24_185401) do
+ActiveRecord::Schema.define(version: 2020_09_24_185901) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,34 +31,6 @@ ActiveRecord::Schema.define(version: 2020_09_24_185401) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["mentee_id"], name: "index_connections_on_mentee_id"
     t.index ["mentor_id"], name: "index_connections_on_mentor_id"
-  end
-
-  create_table "mentee_experiences", force: :cascade do |t|
-    t.boolean "high_school"
-    t.boolean "college"
-    t.boolean "early_career"
-    t.boolean "personal_relationships"
-    t.boolean "romantic_relationships"
-    t.boolean "passions"
-    t.boolean "self_confidence"
-    t.bigint "user_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_mentee_experiences_on_user_id"
-  end
-
-  create_table "mentor_experiences", force: :cascade do |t|
-    t.boolean "high_school"
-    t.boolean "college"
-    t.boolean "early_career"
-    t.boolean "personal_relationships"
-    t.boolean "romantic_relationships"
-    t.boolean "passions"
-    t.boolean "self_confidence"
-    t.bigint "user_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_mentor_experiences_on_user_id"
   end
 
   create_table "posts", force: :cascade do |t|
@@ -92,16 +64,14 @@ ActiveRecord::Schema.define(version: 2020_09_24_185401) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "first_name"
     t.string "last_name"
-    t.boolean "professional", default: false
-    t.boolean "interpersonal", default: false
-    t.boolean "self_improvement", default: false
+    t.boolean "professional"
+    t.boolean "interpersonal"
+    t.boolean "self_improvement"
   end
 
   add_foreign_key "answers", "posts"
   add_foreign_key "connections", "users", column: "mentee_id"
   add_foreign_key "connections", "users", column: "mentor_id"
-  add_foreign_key "mentee_experiences", "users"
-  add_foreign_key "mentor_experiences", "users"
   add_foreign_key "posts", "connections"
   add_foreign_key "questions", "posts"
 end
