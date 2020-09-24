@@ -12,6 +12,8 @@ Answer.destroy_all
 Post.destroy_all
 Connection.destroy_all
 User.destroy_all
+MenteeExperience.destroy_all
+MentorExperience.destroy_all
 
 for i in 0..20 do
     gender = (i % 2 == 0) ? "male" : "female"
@@ -55,24 +57,25 @@ for i in 0..40 do
 end
 
 User.all.each do |user|
-    bool = (rand(0..1) == 0) ? true : false
-    User.mentee_experience.create!(
-        high_school: bool,
-        college: bool,
-        early_career: bool,
-        personal_relationships: bool,
-        romantic_relationships: bool,
-        passions: bool,
-        self_confidence: bool
+    MenteeExperience.create!(
+        high_school: (rand(0..1) == 0) ? true : false,
+        college: (rand(0..1) == 0) ? true : false,
+        early_career: (rand(0..1) == 0) ? true : false,
+        personal_relationships: (rand(0..1) == 0) ? true : false,
+        romantic_relationships: (rand(0..1) == 0) ? true : false,
+        passions: (rand(0..1) == 0) ? true : false,
+        self_confidence: (rand(0..1) == 0) ? true : false,
+        user:user
     )
 
-    User.mentor_experience.create!(
-        high_school: bool,
-        college: bool,
-        early_career: bool,
-        personal_relationships: bool,
-        romantic_relationships: bool,
-        passions: bool,
-        self_confidence: bool
+    MentorExperience.create!(
+        high_school: (rand(0..1) == 0) ? true : false,
+        college: (rand(0..1) == 0) ? true : false,
+        early_career: (rand(0..1) == 0) ? true : false,
+        personal_relationships: (rand(0..1) == 0) ? true : false,
+        romantic_relationships: (rand(0..1) == 0) ? true : false,
+        passions: (rand(0..1) == 0) ? true : false,
+        self_confidence: (rand(0..1) == 0) ? true : false,
+        user:user
     )
 end
