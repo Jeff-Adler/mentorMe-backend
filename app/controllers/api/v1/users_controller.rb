@@ -34,12 +34,19 @@ class Api::V1::UsersController < ApplicationController
     render json: @user.posts("mentee")
   end
 
+  # def retrieve_eligible_mentors
+  #   if @user.birthdate
+  #     render json: @user.eligible_mentors
+  #   else
+  #     render json: { error: 'Need to set your birthdate!' }, status: :not_acceptable
+  #   end
+  # end
+
+
   def retrieve_eligible_mentors
-    if @user.birthdate
-      render json: @user.eligible_mentors
-    else
-      render json: { error: 'Need to set your birthdate!' }, status: :not_acceptable
-    end
+    #returns the type of mentor (professional, interpersonal,etc.) being retrieved
+    mentor_type = id.substr(id.lastIndexOf('/') + 1);
+    
   end
 
   #Retrieves all the users for whom they are the mentor_id in connections and the associated connections
@@ -70,7 +77,7 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def user_edit_params
-    params.require(:user).permit(:username, :password, :first_name, :last_name, :birthdate,:gender,:avatar,:karma).select { |k, v| !v.nil? }
+    params.require(:user).permit(:username, :password, :first_name, :last_name, :birthdate,:gender,:avatar,:karma,:professional,:interpersonal,:self_improvement).select { |k, v| !v.nil? }
   end
 
   def user_params
