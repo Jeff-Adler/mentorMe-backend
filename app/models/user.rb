@@ -30,6 +30,10 @@ class User < ApplicationRecord
         end
     end
 
+    def is_younger?(user)
+        Date.parse(user.birthdate) < Date.parse(self.birthdate)
+    end
+
     # def eligible_mentors
     #     #Eliminates users who self is already connected with
     #     not_connected_users = self.filter_connected_users(User.all)
@@ -64,9 +68,21 @@ class User < ApplicationRecord
     #     self.mentee_experience[experience] == true && user.mentor_experience[experience] == true
     # end
 
-    def is_younger?(user)
-        Date.parse(user.birthdate) < Date.parse(self.birthdate)
-    end
+    # def matched_experiences(user)
+    #     matched_experiences = {
+    #         high_school:false,
+    #         college:false,
+    #         early_career:false,
+    #         personal_relationships:false,
+    #         romantic_relationships:false,
+    #         passions:false,
+    #         self_confidence:false,
+    #     }
+    #     matched_experiences.each do |experience,boolean|
+    #          matched_experiences[experience] = self.compare_experience(user,experience)
+    #     end
+    #     matched_experiences
+    # end
 
     def pending_connections 
         Connection.all.select do |connection| 
