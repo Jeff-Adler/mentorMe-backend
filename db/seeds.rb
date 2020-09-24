@@ -17,10 +17,10 @@ for i in 0..20 do
         birthdate: Faker::Date.birthday(min_age: 18, max_age: 65),
         gender: gender,
         avatar: Faker::Alphanumeric.alpha(number: 10),
-        prof_q1: Faker::Alphanumeric.alpha(number: 10),
-        prof_q2: Faker::Alphanumeric.alpha(number: 10),
-        prof_q3: Faker::Alphanumeric.alpha(number: 10),
-        karma: rand(1...50)
+        karma: rand(1...50),
+        professional: (rand(0..1) == 0 ? true : false),
+        interpersonal: (rand(0..1) == 0 ? true : false),
+        self_improvement: (rand(0..1) == 0 ? true : false),
     )
 end
 
