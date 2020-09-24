@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
   
+  resources :mentee_experiences
+  resources :mentor_experiences
+  resources :create_mentor_experiences
+  resources :create_mentee_experiences
   get 'api/v1/users/:id', to: 'api/v1/users#show'  
   patch 'api/v1/users/:id', to: 'api/v1/users#update'
   get 'api/v1/users/:id/posts/mentor', to: 'api/v1/users#retrieve_mentor_posts'

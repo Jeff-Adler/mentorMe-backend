@@ -1,0 +1,2 @@
+class MenteeExperiencesController < ApplicationController
+end
