@@ -61,9 +61,9 @@ ActiveRecord::Schema.define(version: 2020_09_24_194423) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "first_name"
     t.string "last_name"
-    t.boolean "professional"
-    t.boolean "interpersonal"
-    t.boolean "self_improvement"
+    t.boolean "professional", default: false
+    t.boolean "interpersonal", default: false
+    t.boolean "self_improvement", default: false
   end
 
   add_foreign_key "answers", "posts"
