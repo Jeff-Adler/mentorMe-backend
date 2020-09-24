@@ -53,3 +53,26 @@ for i in 0..40 do
         post: post
     )
 end
+
+User.all.each do |user|
+    bool = (rand(0..1) == 0) ? true : false
+    User.mentee_experience.create!(
+        high_school: bool,
+        college: bool,
+        early_career: bool,
+        personal_relationships: bool,
+        romantic_relationships: bool,
+        passions: bool,
+        self_confidence: bool
+    )
+
+    User.mentor_experience.create!(
+        high_school: bool,
+        college: bool,
+        early_career: bool,
+        personal_relationships: bool,
+        romantic_relationships: bool,
+        passions: bool,
+        self_confidence: bool
+    )
+end
