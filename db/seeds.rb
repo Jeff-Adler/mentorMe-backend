@@ -8,6 +8,12 @@ Post.destroy_all
 Connection.destroy_all
 User.destroy_all
 
+MENTOR_TYPES = [
+            "professional",
+            "interpersonal",
+            "self-improvement"
+        ]
+
 for i in 0..20 do
     gender = (i % 2 == 0) ? "male" : "female"
     response = HTTParty.get("https://randomuser.me/api/?inc=picture&?gender=#{gender}&noinfo")
@@ -30,11 +36,13 @@ for i in 0..20 do
 end
 
 for i in 0..40 do
+    random_index = rand(0..2)
     accepted = (i % 2 == 0) ? true : false
     connection =  Connection.create!(
         mentee_id: User.all.sample.id,
         mentor_id: User.all.sample.id,
-        accepted: accepted
+        accepted: accepted,
+        mentor_type: MENTOR_TYPES[random_index]
     )
 
     post = Post.create!(

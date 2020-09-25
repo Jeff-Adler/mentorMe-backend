@@ -8,7 +8,7 @@ class ConnectionsController < ApplicationController
     private
   
     def connection_params
-        params.require(:connection).permit(:mentee_id,:mentor_id)
+        params.require(:connection).permit(:mentee_id,:mentor_id,:mentor_type)
     end
 
     def connection_accept_params
