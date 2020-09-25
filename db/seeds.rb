@@ -1,4 +1,6 @@
 require 'faker'
+require 'httparty'
+require 'json'
 
 Question.destroy_all
 Answer.destroy_all
@@ -8,6 +10,8 @@ User.destroy_all
 
 for i in 0..20 do
     gender = (i % 2 == 0) ? "male" : "female"
+    response = HTTParty.get("https://randomuser.me/api/?inc=picture&noinfo")
+    userImage = JSON.parse(response.body)["results"][0]["picture"]["large"]
 
     user = User.create!(
         username: Faker::Internet.username(specifier: 7..12),
@@ -16,7 +20,7 @@ for i in 0..20 do
         password: Faker::Alphanumeric.alpha(number: 10),
         birthdate: Faker::Date.birthday(min_age: 18, max_age: 65),
         gender: gender,
-        avatar: Faker::Alphanumeric.alpha(number: 10),
+        avatar: userImage,
         karma: rand(1...50),
         professional: (rand(0..1) == 0 ? true : false),
         interpersonal: (rand(0..1) == 0 ? true : false),
