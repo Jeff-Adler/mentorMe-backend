@@ -100,7 +100,7 @@ class User < ApplicationRecord
         connections = self.accepted_connections(user_type)
 
         if connections != nil
-            Post.map_posts_from_connections(connections)
+            posts = Post.map_posts_from_connections(connections)
         end
     end
 end

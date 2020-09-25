@@ -8,6 +8,11 @@ class Post < ApplicationRecord
       end
 
       filteredConnections.map do |connection|
+        # {post:[
+        #   connection.post,
+        #   {connection: connection}
+        #   ]
+        # }
           connection.post
       end
   end
