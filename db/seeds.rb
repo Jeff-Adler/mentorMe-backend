@@ -10,7 +10,7 @@ User.destroy_all
 
 for i in 0..20 do
     gender = (i % 2 == 0) ? "male" : "female"
-    response = HTTParty.get("https://randomuser.me/api/?inc=picture&noinfo")
+    response = HTTParty.get("https://randomuser.me/api/?inc=picture&?gender=#{gender}&noinfo")
     userImage = JSON.parse(response.body)["results"][0]["picture"]["large"]
 
     user = User.create!(
