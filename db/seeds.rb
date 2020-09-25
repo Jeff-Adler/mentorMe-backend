@@ -25,7 +25,7 @@ for i in 0..20 do
         professional: (rand(0..1) == 0 ? true : false),
         interpersonal: (rand(0..1) == 0 ? true : false),
         self_improvement: (rand(0..1) == 0 ? true : false),
-        description: "I'm a (placeholder) looking to (work on Placeholder)!"
+        description: "(placeholder) looking to (work on Placeholder)!"
     )
 end
 
