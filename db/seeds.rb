@@ -14,7 +14,7 @@ MENTOR_TYPES = [
             "self-improvement"
         ]
 
-for i in 0..20 do
+for i in 0..40 do
     gender = (i % 2 == 0) ? "male" : "female"
     response = HTTParty.get("https://randomuser.me/api/?inc=picture&?gender=#{gender}&noinfo")
     userImage = JSON.parse(response.body)["results"][0]["picture"]["large"]
@@ -35,7 +35,7 @@ for i in 0..20 do
     )
 end
 
-for i in 0..40 do
+for i in 0..50 do
     random_index = rand(0..2)
     accepted = (i % 2 == 0) ? true : false
     connection =  Connection.create!(
