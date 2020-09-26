@@ -17,12 +17,12 @@ class Post < ApplicationRecord
     end
 
     filteredConnections.map do |connection|
-      [
-        {post: connection.post},
-        {connection: connection},
-        {mentee: connection.mentee},
-        {mentor: connection.mentor}
-      ]
+      {
+        post: connection.post,
+        connection: connection,
+        mentee: connection.mentee,
+        mentor: connection.mentor
+      }
     end
   end
 end
