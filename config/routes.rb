@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   
   get 'api/v1/users/:id', to: 'api/v1/users#show'  
   patch 'api/v1/users/:id', to: 'api/v1/users#update'
+  get 'api/v1/users/:id/posts/', to: 'api/v1/users#retrieve_posts'
   get 'api/v1/users/:id/posts/mentor', to: 'api/v1/users#retrieve_mentor_posts'
   get 'api/v1/users/:id/posts/mentee', to: 'api/v1/users#retrieve_mentee_posts'
   get 'api/v1/users/:id/retrieve_eligibles/:mentor_type', to: 'api/v1/users#retrieve_eligible_mentors'

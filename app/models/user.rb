@@ -84,23 +84,37 @@ class User < ApplicationRecord
         end
     end
 
-    def accepted_connections(user_type)
-        if user_type == "mentor"
-            Connection.all.select do |connection|
-                connection.mentor_id == self.id && connection.accepted == true
-            end
-        elsif user_type == "mentee"
-            Connection.all.select do |connection|
-                connection.mentee_id == self.id && connection.accepted == true
-            end
+    # def accepted_connections(user_type)
+    #     if user_type == "mentor"
+    #         Connection.all.select do |connection|
+    #             connection.mentor_id == self.id && connection.accepted == true
+    #         end
+    #     elsif user_type == "mentee"
+    #         Connection.all.select do |connection|
+    #             connection.mentee_id == self.id && connection.accepted == true
+    #         end
+    #     end
+    # end
+
+    def accepted_connections
+        Connection.all.select do |connection|
+            (connection.mentee_id == self.id && connection.accepted == true) || (connection.mentor_id == self.id && connection.accepted == true)
         end
     end
 
-    def posts(user_type)
-        connections = self.accepted_connections(user_type)
+    def posts
+        connections = self.accepted_connections
 
         if connections != nil
             posts = Post.map_posts_from_connections(connections)
         end
     end
+
+    # def posts(user_type)
+    #     connections = self.accepted_connections(user_type)
+
+    #     if connections != nil
+    #         posts = Post.map_posts_from_connections(connections)
+    #     end
+    # end
 end
