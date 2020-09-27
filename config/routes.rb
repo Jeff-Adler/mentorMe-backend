@@ -12,8 +12,6 @@ Rails.application.routes.draw do
   
   resources :mentee_experiences
   resources :mentor_experiences
-  resources :answers
-  resources :questions
   resources :posts
   resources :connections
   namespace :api do
