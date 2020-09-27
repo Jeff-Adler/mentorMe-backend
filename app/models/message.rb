@@ -1,4 +1,4 @@
 class Message < ApplicationRecord
   belongs_to :post
-  belongs_to :user
+  belongs_to :user #cannot access through user. 
 end

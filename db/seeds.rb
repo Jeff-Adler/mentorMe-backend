@@ -2,8 +2,7 @@ require 'faker'
 require 'httparty'
 require 'json'
 
-Question.destroy_all
-Answer.destroy_all
+Message.destroy_all
 Post.destroy_all
 Connection.destroy_all
 User.destroy_all
@@ -47,15 +46,5 @@ for i in 0..50 do
 
     post = Post.create!(
         connection: connection, mentee_name:connection.mentee.username, mentor_name:connection.mentor.username
-    )
-
-    question = Question.create!(
-        question: Faker::Lorem.paragraph(sentence_count: 2, supplemental: false, random_sentences_to_add: 4),
-        post: post
-    )
-
-    answer = Answer.create!(
-        answer: Faker::Lorem.paragraph(sentence_count: 2, supplemental: false, random_sentences_to_add: 4),
-        post: post
     )
 end

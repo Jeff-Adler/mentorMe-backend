@@ -1,6 +1,6 @@
 class Post < ApplicationRecord
   belongs_to :connection
-  has_one :message
+  has_many :messages
 
   # def self.map_posts_from_connections(connections)  
   #     filteredConnections = connections.select do |connection|
