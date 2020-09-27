@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
   
-  
   get 'api/v1/users/:id', to: 'api/v1/users#show'  
   patch 'api/v1/users/:id', to: 'api/v1/users#update'
   get 'api/v1/users/:id/posts/', to: 'api/v1/users#retrieve_posts'
@@ -10,8 +9,7 @@ Rails.application.routes.draw do
   get 'api/v1/users/:id/retrieve_pendings', to: 'api/v1/users#retrieve_pendings'
   patch 'api/v1/users/:id/accept_pending', to: 'api/v1/users#accept_pending'
   
-  resources :mentee_experiences
-  resources :mentor_experiences
+  resources :messages
   resources :posts
   resources :connections
   namespace :api do
