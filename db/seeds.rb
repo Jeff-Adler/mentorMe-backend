@@ -12,7 +12,7 @@ MENTOR_TYPES = [
             "professional",
             "interpersonal",
             "self-improvement"
-        ]
+    ]
 
 for i in 0..40 do
     gender = (i % 2 == 0) ? "male" : "female"
