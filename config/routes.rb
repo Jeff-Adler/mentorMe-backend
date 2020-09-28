@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   patch 'api/v1/users/:id/accept_pending', to: 'api/v1/users#accept_pending'
   get 'posts/:id/messages', to: 'posts#retrieve_messages'
   post 'api/v1/users/:user_id/posts/:post_id/messages', to: 'messages#create'
+
+  mount ActionCable.server => '/cable'
   
   resources :messages
   resources :posts
