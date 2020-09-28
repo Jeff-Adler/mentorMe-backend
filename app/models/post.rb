@@ -1,6 +1,7 @@
 class Post < ApplicationRecord
   belongs_to :connection
   has_many :messages
+  accepts_nested_attributes_for :messages
 
   # def self.map_posts_from_connections(connections)  
   #     filteredConnections = connections.select do |connection|
