@@ -6,7 +6,7 @@ class PostsController < ApplicationController
     end
 
     def retrieve_messages
-        render json: @post.messages
+        render json: @post.messages.order({ created_at: :desc })
     end
 
     def create_message
