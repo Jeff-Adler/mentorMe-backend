@@ -9,7 +9,8 @@ Rails.application.routes.draw do
   get 'api/v1/users/:id/retrieve_pendings', to: 'api/v1/users#retrieve_pendings'
   patch 'api/v1/users/:id/accept_pending', to: 'api/v1/users#accept_pending'
   get 'posts/:id/messages', to: 'posts#retrieve_messages'
-  post 'posts/:id/messages', to: 'posts#create_message'
+  post 'posts/:id/messages', to: 'posts#create_message' #not used
+  post 'api/v1/users/:user_id/posts/:post_id/messages', to: 'messages#create'
   
   resources :messages
   resources :posts

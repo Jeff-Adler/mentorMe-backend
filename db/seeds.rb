@@ -13,7 +13,8 @@ MENTOR_TYPES = [
             "self-improvement"
     ]
 
-for i in 0..40 do
+for i in 0..40 do 
+    #implement begin/rescue command in case API does not send response
     gender = (i % 2 == 0) ? "male" : "female"
     response = HTTParty.get("https://randomuser.me/api/?inc=picture&?gender=#{gender}&noinfo")
     userImage = JSON.parse(response.body)["results"][0]["picture"]["large"]

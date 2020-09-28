@@ -1,6 +1,6 @@
 namespace :app do
     desc 'All'
-    task all: [:pending_creator,:post_creator]
+    task all: [:pending_creator,:post_creator,:message_creator]
 
     desc "Create connection requests to User.last"
     task :pending_creator => :environment do
