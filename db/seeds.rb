@@ -15,7 +15,7 @@ MENTOR_TYPES = [
 
 for i in 0..40 do 
     gender = (i % 2 == 0) ? "male" : "female"
-    name = (gender == "female") ? Faker::Name.female_first_name : Faker::Name.male_first_name
+    name = (gender == "female") ? Faker::Name.unique.female_first_name : Faker::Name.unique.male_first_name
     begin
         response = HTTParty.get("https://randomuser.me/api/?inc=picture&?gender=#{gender}&noinfo")
         userImage = JSON.parse(response.body)["results"][0]["picture"]["large"]
@@ -23,7 +23,7 @@ for i in 0..40 do
         userImage = nil
     end
     user = User.create!(
-        username: Faker::Internet.username(specifier: 7..12),
+        username: Faker::Internet.unique.username(specifier: 7..12),
         first_name: name,
         last_name: Faker::Name.last_name,
         password: Faker::Alphanumeric.alpha(number: 10),
