@@ -14,14 +14,17 @@ MENTOR_TYPES = [
     ]
 
 for i in 0..40 do 
-    #implement begin/rescue command in case API does not send response
     gender = (i % 2 == 0) ? "male" : "female"
-    response = HTTParty.get("https://randomuser.me/api/?inc=picture&?gender=#{gender}&noinfo")
-    userImage = JSON.parse(response.body)["results"][0]["picture"]["large"]
-
+    name = (gender == "female") ? Faker::Name.female_first_name : Faker::Name.male_first_name
+    begin
+        response = HTTParty.get("https://randomuser.me/api/?inc=picture&?gender=#{gender}&noinfo")
+        userImage = JSON.parse(response.body)["results"][0]["picture"]["large"]
+    rescue JSON::ParserError
+        userImage = nil
+    end
     user = User.create!(
         username: Faker::Internet.username(specifier: 7..12),
-        first_name: Faker::Name.first_name,
+        first_name: name,
         last_name: Faker::Name.last_name,
         password: Faker::Alphanumeric.alpha(number: 10),
         birthdate: Faker::Date.birthday(min_age: 18, max_age: 65),

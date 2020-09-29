@@ -1,3 +1,6 @@
+require 'httparty'
+require 'json'
+
 class Api::V1::UsersController < ApplicationController
   skip_before_action :authorized, only: [:create]
   before_action :find_user, only: [:show, :update, :retrieve_eligible_mentors, :retrieve_pendings,:retrieve_mentor_posts,:retrieve_mentee_posts]
@@ -18,6 +21,16 @@ class Api::V1::UsersController < ApplicationController
 
   def update
     @user.assign_attributes(user_edit_params)
+    if @user.gender == "male" || @user.gender == "female"
+      begin
+        gender = @user.gender
+        response = HTTParty.get("https://randomuser.me/api/?inc=picture&?gender=#{gender}&noinfo")
+        userImage = JSON.parse(response.body)["results"][0]["picture"]["large"]
+      rescue JSON::ParserError
+        userImage = nil
+      end
+    @user.avatar = userImage
+    end
     @user.save(validate: false) #Overrides minimum password character count validation, which wrongly applies otherwise
     render json: {user: UserSerializer.new(@user)}
   end
