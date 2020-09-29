@@ -21,7 +21,6 @@ class Api::V1::UsersController < ApplicationController
 
   def update
     @user.assign_attributes(user_edit_params)
-    puts user_edit_params
     if user_edit_params[:gender] && @user.gender == "male" || @user.gender == "female"
       begin
         gender = @user.gender
