@@ -23,7 +23,7 @@ class Api::V1::UsersController < ApplicationController
     @user.assign_attributes(user_edit_params)
     if user_edit_params[:gender] && @user.gender == "male" || @user.gender == "female"
       begin
-        response = HTTParty.get("https://randomuser.me/api/?inc=picture&?gender=#{@user.gender}&noinfo&?seed=#{@user.id}")
+        response = HTTParty.get("https://randomuser.me/api/?gender=#{@user.gender}&noinfo&?seed=#{@user.id}")
         userImage = JSON.parse(response.body)["results"][0]["picture"]["large"]
       rescue JSON::ParserError
         userImage = nil
