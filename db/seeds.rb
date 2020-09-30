@@ -17,7 +17,7 @@ for i in 0..40 do
     gender = (i % 2 == 0) ? "male" : "female"
     name = (gender == "female") ? Faker::Name.unique.female_first_name : Faker::Name.unique.male_first_name
     begin
-        response = HTTParty.get("https://randomuser.me/api/?inc=picture&?gender=#{gender}&noinfo")
+        response = HTTParty.get("https://randomuser.me/api/?inc=picture&?gender=#{gender}&noinfo&?seed=#{name}")
         userImage = JSON.parse(response.body)["results"][0]["picture"]["large"]
     rescue JSON::ParserError
         userImage = nil
@@ -30,7 +30,6 @@ for i in 0..40 do
         birthdate: Faker::Date.birthday(min_age: 18, max_age: 65),
         gender: gender,
         avatar: userImage,
-        karma: rand(1...50),
         professional: (rand(0..1) == 0 ? true : false),
         interpersonal: (rand(0..1) == 0 ? true : false),
         self_improvement: (rand(0..1) == 0 ? true : false),
@@ -49,6 +48,6 @@ for i in 0..50 do
     )
 
     post = Post.create!(
-        connection: connection, mentee_name:connection.mentee.username, mentor_name:connection.mentor.username
+        connection: connection
     )
 end

@@ -82,7 +82,7 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def user_edit_params
-    params.require(:user).permit(:username, :password, :first_name, :last_name, :birthdate,:gender,:avatar,:karma,:professional,:interpersonal,:self_improvement,:description).select { |k, v| !v.nil? }
+    params.require(:user).permit(:username, :password, :first_name, :last_name, :birthdate,:gender,:avatar, :professional,:interpersonal,:self_improvement,:description).select { |k, v| !v.nil? }
   end
 
   def user_params
