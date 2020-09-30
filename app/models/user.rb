@@ -8,25 +8,7 @@ class User < ApplicationRecord
 
     has_many :mentee_connections, class_name: :Connection, foreign_key: :mentor_id
     has_many :mentees, through: :mentee_connections, foreign_key: :mentee_id
-
-    def calculate_karma
-        if self.mentee_connections.length != 0
-            self.mentor_connections.length / self.mentee_connections.length
-        else
-            0
-        end
-    end
     
-    # def eligible_mentors
-    #     eligible_mentors = User.all.select do |user|
-    #         self.is_younger?(user) unless user.id == self.id || user.birthdate == nil
-    #     end
-
-    #     filtered_eligible_mentors = eligible_mentors.select do |user|
-    #         Connection.find_by(mentee: self, mentor: user) == nil
-    #     end
-    # end
-
     def eligible_mentors(mentor_type)
         #filters out self
         all_other_users = self.filter_self(User.all)
@@ -84,18 +66,6 @@ class User < ApplicationRecord
         end
     end
 
-    # def accepted_connections(user_type)
-    #     if user_type == "mentor"
-    #         Connection.all.select do |connection|
-    #             connection.mentor_id == self.id && connection.accepted == true
-    #         end
-    #     elsif user_type == "mentee"
-    #         Connection.all.select do |connection|
-    #             connection.mentee_id == self.id && connection.accepted == true
-    #         end
-    #     end
-    # end
-
     def accepted_connections
         Connection.all.select do |connection|
             (connection.mentee_id == self.id && connection.accepted == true) || (connection.mentor_id == self.id && connection.accepted == true)
@@ -109,12 +79,4 @@ class User < ApplicationRecord
             posts = Post.map_posts_from_connections(connections)
         end
     end
-
-    # def posts(user_type)
-    #     connections = self.accepted_connections(user_type)
-
-    #     if connections != nil
-    #         posts = Post.map_posts_from_connections(connections)
-    #     end
-    # end
 end
