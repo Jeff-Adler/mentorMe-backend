@@ -67,7 +67,7 @@ class Api::V1::UsersController < ApplicationController
     connection = Connection.find_by(mentee_id: user_accept_params[:user_id], mentor_id: params[:id])
     connection.accepted = true
     connection.save
-    post = Post.create(connection: connection, mentee_name: connection.mentee.username, mentor_name: connection.mentor.username)
+    post = Post.create(connection: connection)
     if connection.valid? && post.valid?
       render json: connection
     else
