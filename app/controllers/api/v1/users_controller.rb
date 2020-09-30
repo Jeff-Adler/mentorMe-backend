@@ -31,7 +31,7 @@ class Api::V1::UsersController < ApplicationController
       end
     @user.avatar = userImage
     end
-    @user.save(validate: false) #Overrides minimum password character count validation, which wrongly applies otherwise
+    @user.save(validate: false) #Overrides minimum password character count validation
     render json: {user: UserSerializer.new(@user)}
   end
 
@@ -42,14 +42,6 @@ class Api::V1::UsersController < ApplicationController
   def retrieve_posts 
     render json: @user.posts
   end
-
-  # def retrieve_mentor_posts
-  #   render json: @user.posts("mentor")
-  # end
-
-  # def retrieve_mentee_posts
-  #   render json: @user.posts("mentee")
-  # end
 
   #returns the type of mentor (professional, interpersonal,etc.) being retrieved
   def retrieve_eligible_mentors

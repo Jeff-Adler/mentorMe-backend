@@ -13,11 +13,6 @@ class PostsController < ApplicationController
         @post.messages.create(message_params)
     end
 
-    # No longer used by app
-    def show 
-        render json: @post
-    end
-
     private
 
     def find_post

@@ -3,16 +3,6 @@ class Post < ApplicationRecord
   has_many :messages
   accepts_nested_attributes_for :messages
 
-  # def self.map_posts_from_connections(connections)  
-  #     filteredConnections = connections.select do |connection|
-  #       connection.post != nil
-  #     end
-
-  #     filteredConnections.map do |connection|
-  #         connection.post
-  #     end
-  # end
-
   def self.map_posts_from_connections(connections)
     filteredConnections = connections.select do |connection|
       connection.post != nil
