@@ -8,10 +8,23 @@ Connection.destroy_all
 User.destroy_all
 
 MENTOR_TYPES = [
-            "professional",
-            "interpersonal",
-            "self-improvement"
-    ]
+    "professional",
+    "interpersonal",
+    "self-improvement"
+]
+
+DESCRIPTION_BLURBS = [
+    "HS student looking to improve my self-esteem.",
+    "College student looking to work on my romanitc relationships.",
+    "College student looking to find some hobbies.",
+    "College student looking to be less shy.",
+    "Early-career professional looking to get direction.",
+    "Early-career professional looking to find a role in finance.",
+    "Early-career professional looking to become a yoga teacher.",
+    "Career changer looking to break into software engineering!",
+    "Career changer looking to break into freelance!",
+    "Career changer looking to learn more about entrepeneurship!"
+]
 
 for i in 0..40 do 
     gender = (i % 2 == 0) ? "male" : "female"
@@ -33,7 +46,7 @@ for i in 0..40 do
         professional: (rand(0..1) == 0 ? true : false),
         interpersonal: (rand(0..1) == 0 ? true : false),
         self_improvement: (rand(0..1) == 0 ? true : false),
-        description: "(placeholder) looking to (work on Placeholder)!"
+        description: DESCRIPTION_BLURBS[rand(0..(DESCRIPTION_BLURBS.length - 1))]
     )
 end
 
@@ -57,18 +70,17 @@ for i in 0..15 do
         professional: (rand(0..1) == 0 ? true : false),
         interpersonal: (rand(0..1) == 0 ? true : false),
         self_improvement: (rand(0..1) == 0 ? true : false),
-        description: "(placeholder) looking to (work on Placeholder)!"
+        description: DESCRIPTION_BLURBS[rand(0..(DESCRIPTION_BLURBS.length - 1))]
     )
 end
 
 for i in 0..50 do
-    random_index = rand(0..2)
     accepted = (i % 2 == 0) ? true : false
     connection =  Connection.create!(
         mentee_id: User.all.sample.id,
         mentor_id: User.all.sample.id,
         accepted: accepted,
-        mentor_type: MENTOR_TYPES[random_index]
+        mentor_type: MENTOR_TYPES[rand(0..2)]
     )
 
     post = Post.create!(
