@@ -26,7 +26,7 @@ DESCRIPTION_BLURBS = [
     "Career changer looking to learn more about entrepeneurship!"
 ]
 
-for i in 0..40 do 
+for i in 0..30 do 
     gender = (i % 2 == 0) ? "male" : "female"
     name = (gender == "female") ? Faker::Name.unique.female_first_name : Faker::Name.unique.male_first_name
     begin
@@ -50,11 +50,11 @@ for i in 0..40 do
     )
 end
 
-for i in 0..15 do 
+for i in 0..8 do 
     gender = (i % 2 == 0) ? "male" : "female"
     name = (gender == "female") ? Faker::Name.unique.female_first_name : Faker::Name.unique.male_first_name
     begin
-        response = HTTParty.get("https://randomuser.me/api/?inc=picture&?gender=#{gender}&noinfo&?seed=#{name}")
+        response = HTTParty.get("https://randomuser.me/api/?gender=#{gender}&noinfo&?seed=#{name}")
         userImage = JSON.parse(response.body)["results"][0]["picture"]["large"]
     rescue JSON::ParserError
         userImage = nil
